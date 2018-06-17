@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragments/header :: common_header(~{::title},~{::link})">
+<title>Sign Up</title>
+</head>
+<body>
+	<div class="container" style="max-width: 600px; margin-top: 50px">
+		<h3 class="page-header">Sign Up</h3>
+		<div class="well">
+			<form th:action="@{/register}" th:object="${userForm}" method="post">
+				<div class="form-group">
+					<label for="usernameId">Username</label> <input type="text"
+						name="username" id="usernameId" class="form-control"
+						th:field="*{username}">
+					<p class="form-control-static text-danger"
+						th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+				</div>
+				<div class="form-group">
+					<label for="passwordId">Password</label> <input type="password"
+						name="password" id="passwordId" class="form-control">
+					<p class="form-control-static text-danger"
+						th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+				</div>
+				<div class="form-group">
+					<label for="confirmPasswordId">Confirm Password</label> <input
+						type="password" name="confirmPassword" id="confirmPasswordId"
+						class="form-control">
+					<p class="form-control-static text-danger"
+						th:if="${#fields.hasErrors('confirmPassword')}"
+						th:errors="*{confirmPassword}"></p>
+				</div>
+				<div class="form-group">
+					<label for="emailId">Email</label> <input type="text" name="email"
+						id="emailId" class="form-control" th:field="*{email}">
+					<p class="form-control-static text-danger"
+						th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+				</div>
+				<div class="form-group">
+					<label for="phoneId">Phone</label> <input type="text" name="phone"
+						id="phoneId" class="form-control" th:field="*{phone}">
+					<p class="form-control-static text-danger"
+						th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
+				</div>
+				<p class="text-center">
+					<button type="submit" class="btn btn-primary">Sign Up</button>
+				</p>
+			</form>
+		</div>
+	</div>
+
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
