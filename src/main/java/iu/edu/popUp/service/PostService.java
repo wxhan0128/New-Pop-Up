@@ -7,9 +7,9 @@ import iu.edu.popUp.model.Post;
 public interface PostService {
 	public Post save(Post post);
 
-	public List<Post> findAll(long user_id);
+	public List<Post> findAllPosts(long user_id);
 
-	public Post findOne(long id);
+	public Post findOnePost(long id);
 
 	public void delete(long id);
 }

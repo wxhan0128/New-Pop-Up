@@ -21,13 +21,13 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<Post> findAll(long user_id) {
+	public List<Post> findAllPosts(long user_id) {
 		// TODO Auto-generated method stub
-		return postRepository.findByUserId(user_id);
+		return postRepository.findAllPostsByUserAndFriend(user_id);
 	}
 
 	@Override
-	public Post findOne(long id) {
+	public Post findOnePost(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

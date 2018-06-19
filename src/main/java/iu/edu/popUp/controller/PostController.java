@@ -1,6 +1,7 @@
 package iu.edu.popUp.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,7 +30,7 @@ public class PostController {
 	@GetMapping("/index")
 	public String indexPage(HttpSession session, Model model) {
 		user = (User) session.getAttribute("user");
-		List<Post> postList = postServiceImpl.findAll(user.getId());
+		List<Post> postList = postServiceImpl.findAllPosts(user.getId());
 
 		model.addAttribute("user", user);
 		model.addAttribute("posts", postList);
@@ -44,17 +45,20 @@ public class PostController {
 		postServiceImpl.save(post);
 
 		return "redirect:/index";
-
 	}
 
 	@PostMapping("/posts/liked/input")
 	public String likePost(HttpSession session, @RequestParam long postId) {
 		user = (User) session.getAttribute("user");
-		if (!likedServiceImpl.findLiked(user.getId(), postId).isPresent()) {
-			Liked liked = new Liked();
+		Liked liked = new Liked();
+		Optional<Liked> likedOprional = likedServiceImpl.findLiked(user.getId(), postId);
+		if (!likedOprional.isPresent()) {
 			liked.setUserId(user.getId());
 			liked.setPostId(postId);
 			likedServiceImpl.save(liked);
+		} else {
+			liked = likedOprional.get();
+
 		}
 
 		return "redirect:/index";
