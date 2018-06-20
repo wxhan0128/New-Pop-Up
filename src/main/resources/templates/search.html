@@ -44,8 +44,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-md-3"
-				th:each="postResult,iterStat:${postList}"
-				style="display: inline-block">
+				th:each="postResult,iterStat:${postList}" style="display: inline">
 				<div class="panel panel-default" th:object="${postResult}">
 					<div class="panel-body">
 						<p th:text="${iterStat.count}" hidden>count</p>

@@ -1,5 +1,7 @@
 package iu.edu.popUp.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,12 @@ public class FriendServiceImpl implements FriendService {
 	public Friend save(Friend friend) {
 		// TODO Auto-generated method stub
 		return this.friendRepository.save(friend);
+	}
+
+	@Override
+	public Optional<Friend> findFriend(long uid, long fid) {
+		// TODO Auto-generated method stub
+		return this.friendRepository.findByUserIdAndFriendId(uid, fid);
 	}
 
 }

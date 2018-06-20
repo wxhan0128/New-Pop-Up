@@ -1,6 +1,7 @@
 package iu.edu.popUp.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,9 +28,9 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Post findOnePost(long id) {
+	public Optional<Post> findOnePost(long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.postRepository.findById(id);
 	}
 
 	@Override

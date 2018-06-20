@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import iu.edu.popUp.form.PostForm;
+import iu.edu.popUp.model.Comment;
 import iu.edu.popUp.model.Liked;
 import iu.edu.popUp.model.Post;
 import iu.edu.popUp.model.User;
+import iu.edu.popUp.service.CommentServiceImpl;
 import iu.edu.popUp.service.LikedServiceImpl;
 import iu.edu.popUp.service.PostServiceImpl;
 
@@ -26,6 +28,8 @@ public class PostController {
 	private PostServiceImpl postServiceImpl;
 	@Autowired
 	private LikedServiceImpl likedServiceImpl;
+	@Autowired
+	private CommentServiceImpl commentServiceImpl;
 
 	@GetMapping("/index")
 	public String indexPage(HttpSession session, Model model) {
@@ -60,6 +64,19 @@ public class PostController {
 			liked = likedOprional.get();
 
 		}
+
+		return "redirect:/index";
+	}
+
+	@PostMapping("/posts/comment/input")
+	public String commentPost(HttpSession session, @RequestParam long postId, @RequestParam String content) {
+		Optional<Post> postOptional = this.postServiceImpl.findOnePost(postId);
+		Post post = postOptional.get();
+
+		Comment comment = new Comment();
+		comment.setPost(post);
+		comment.setContent(content);
+		this.commentServiceImpl.save(comment);
 
 		return "redirect:/index";
 	}
