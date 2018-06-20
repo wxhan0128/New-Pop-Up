@@ -53,12 +53,12 @@
 										class="form-control" th:value="*{id}">
 									<button type="submit" class="btn btn-primary">like</button>
 								</form>
-								<button class="btn btn-primary commentBt"
-									style="display: inline">Comment</button>
+								<button class="btn btn-primary" style="display: inline"
+									th:onclick="'showCommentArea('+${iterStat.count}+')'">Comment</button>
 							</div>
 						</div>
 
-						<div>
+						<div th:id="commentArea+${iterStat.count}" style="display: none">
 							<form class="form-horizontal" th:action="@{/posts/comment/input}"
 								method="post">
 								<textarea class="form-control" name="content" id="contentId"
@@ -74,6 +74,19 @@
 								</div>
 							</div>
 						</div>
+
+						<script th:inline="javascript">
+						<!-- function to change display to block -->
+							function showCommentArea(c) {
+								var divId = "commentArea" + c;
+								var div = document.getElementById(divId);
+								if (div.style.display == "none") {
+									div.style.display = "block";
+								} else {
+									div.style.display = "none";
+								}
+							}
+						</script>
 					</div>
 				</div>
 			</div>
