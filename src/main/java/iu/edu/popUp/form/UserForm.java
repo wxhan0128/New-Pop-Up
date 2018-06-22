@@ -33,7 +33,7 @@ public class UserForm {
 	public UserForm() {
 		Random random = new Random();
 		int index = random.nextInt(16) + 1;
-		String avatarUrl = "/images/profile_imgs/defaults/head" + index + ".png";
+		String avatarUrl = "/images/defaultProfileImgs/head" + index + ".png";
 
 		this.avatar = avatarUrl;
 	}

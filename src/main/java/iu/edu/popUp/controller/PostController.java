@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import iu.edu.popUp.form.CommentForm;
 import iu.edu.popUp.form.PostForm;
 import iu.edu.popUp.model.Comment;
 import iu.edu.popUp.model.Liked;
@@ -69,13 +70,12 @@ public class PostController {
 	}
 
 	@PostMapping("/posts/comment/input")
-	public String commentPost(HttpSession session, @RequestParam long postId, @RequestParam String content) {
+	public String commentPost(HttpSession session, @RequestParam long postId, CommentForm commentForm) {
+		user = (User) session.getAttribute("user");
 		Optional<Post> postOptional = this.postServiceImpl.findOnePost(postId);
 		Post post = postOptional.get();
 
-		Comment comment = new Comment();
-		comment.setPost(post);
-		comment.setContent(content);
+		Comment comment = commentForm.convertToComment(user, post);
 		this.commentServiceImpl.save(comment);
 
 		return "redirect:/index";

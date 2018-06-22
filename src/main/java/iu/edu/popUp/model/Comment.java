@@ -21,6 +21,11 @@ public class Comment {
 	@JoinColumn(nullable = false)
 	private Post post;
 
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	// @JsonIgnore
+	private User user;
+
 	public Comment() {
 
 	}
@@ -55,6 +60,14 @@ public class Comment {
 
 	public void setPost(Post post) {
 		this.post = post;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

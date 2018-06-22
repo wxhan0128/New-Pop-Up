@@ -6,6 +6,8 @@ logging:
     iu.edu.popUp: debug
   file: logs/app.log
 spring:
+  mvc:
+    static-path-pattern: /**
   thymeleaf:
     mode: HTML
   datasource:

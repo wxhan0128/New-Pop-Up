@@ -1,0 +1,14 @@
+<div th:fragment="postInput" class="mb-4 card">
+	<div class="card-body">
+		<form id="postForm" th:action="@{/posts/input}" method="post">
+			<div class="form-group">
+				<label for="contentId">Share your moment here</label>
+				<textarea class="form-control" name="content" id="contentId"
+					rows="3"></textarea>
+			</div>
+			<p class="text-right">
+				<button type="submit" class="btn btn-primary">Send</button>
+			</p>
+		</form>
+	</div>
+</div>
