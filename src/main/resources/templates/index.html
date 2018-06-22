@@ -26,61 +26,14 @@
 
 			<div class="col-xs-12 col-md-7">
 				<div th:replace="fragments/postInput :: postInput"></div>
-
-				<div class="media border p-2" th:each="post,iterStat:${posts}"
-					th:object="${post}">
-					<a class="pr-3" href="#"> <img class="rounded-circle"
-						th:src="*{user.avatar}" style="width: 50px;">
-					</a>
-					<div class="media-body">
-						<p th:text="${iterStat.count}" hidden>count</p>
-						<h5 th:text="*{user.username}">username</h5>
-						<small th:text="*{createTime}">time</small>
-						<p class="card-text" th:text="*{content}">content</p>
-
-						<div>
-							<form th:action="@{/posts/liked/input}" method="post"
-								style="display: inline">
-								<input type="hidden" name="postId" id="postIdId"
-									class="form-control" th:value="*{id}">
-								<button type="submit" class="btn btn-primary">like</button>
-							</form>
-							<button class="btn btn-primary" style="display: inline"
-								data-toggle="collapse"
-								th:attr="data-target='#commentArea'+${iterStat.count}">Comment</button>
-						</div>
-
-						<div class="collapse" th:id="commentArea+${iterStat.count}">
-							<form class="form-inline" th:action="@{/posts/comment/input}"
-								method="post">
-								<textarea class="form-control my-2 mr-2" name="content"
-									id="contentId" rows="1" style="min-width: 80%"></textarea>
-								<input type="hidden" name="postId" id="postIdId"
-									class="form-control" th:value="*{id}">
-								<button type="submit" class="btn btn-primary">Reply</button>
-							</form>
-
-							<div class="media border px-2 pt-2"
-								th:each="comment,iterStat:*{comments}" th:object="${comment}">
-								<a class="pr-3" href="#"> <img class="rounded-circle"
-									th:src="*{user.avatar}" style="width: 50px;">
-								</a>
-								<div class="media-body">
-									<p th:text="${iterStat.count}" hidden>count</p>
-									<h5 th:text="*{user.username}">username</h5>
-									<small th:text="*{postTime}">time</small>
-									<p class="list-group-item-text" th:text="*{content}">content</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<div th:insert="fragments/postList :: blankList"
+					th:if="${posts.isEmpty()}"></div>
+				<div th:replace="fragments/postList :: postList"></div>
 			</div>
 		</div>
 	</div>
 
 	<div th:replace="fragments/footer :: footer"></div>
-	<script th:src="@{/js/cust/test.js}" src="/js/cust/test.js"></script>
 </body>
 </html>
 

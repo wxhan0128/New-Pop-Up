@@ -47,6 +47,8 @@
 						th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
 				</div>
 				<p class="text-center">
+					<a href="#" th:href="@{/login}">Already have the account? Login
+						here.</a>
 					<button type="submit" class="btn btn-primary">Sign Up</button>
 				</p>
 			</form>

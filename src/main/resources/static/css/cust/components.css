@@ -1,14 +1,16 @@
-hr {
-	margin-top: 5px;
-	margin-bottom: 15px;
-	border: 0;
-	border-top: 1px solid rgba(0, 0, 0, 0.1);
+.hr-text {
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
 }
 
-.commentList {
-	margin: 15px;
+.hr-text .line {
+	display: inline-block;
+	width: 150px;
+	border-top: 1px solid #ccc;
 }
 
-ul.borderless {
-	border-top: 0 none;
+.hr-text .txt {
+	color: #686868;
+	vertical-align: middle;
 }
