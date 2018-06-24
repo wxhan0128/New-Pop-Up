@@ -8,13 +8,13 @@
 	th:each="post,iterStat:${posts}" th:object="${post}">
 	<a class="pr-3" href="#" th:href="@{'/users/'+*{user.id}+'/profile'}">
 		<img class="rounded-circle" th:src="*{user.avatar}"
-		style="width: 50px;">
+		style="width: 45px;">
 	</a>
 	<div class="media-body">
 		<p th:text="${iterStat.count}" hidden>count</p>
-		<h5 th:text="*{user.username}">username</h5>
-		<small th:text="*{createTime}">time</small>
-		<p class="card-text" th:text="*{content}">content</p>
+		<h5 th:text="*{user.username}" style="display: inline">username</h5>
+		<small><i th:text="*{createTime}">time</i></small>
+		<p th:text="*{content}">content</p>
 
 		<div>
 			<form th:action="@{/posts/liked/input}" method="post"
@@ -42,13 +42,13 @@
 				th:each="comment,iterStat:*{comments}" th:object="${comment}">
 				<a class="pr-3" href="#"
 					th:href="@{'/users/'+*{user.id}+'/profile'}"> <img
-					class="rounded-circle" th:src="*{user.avatar}" style="width: 50px;">
+					class="rounded-circle" th:src="*{user.avatar}" style="width: 45px;">
 				</a>
 				<div class="media-body">
 					<p th:text="${iterStat.count}" hidden>count</p>
-					<h5 th:text="*{user.username}">username</h5>
-					<small th:text="*{postTime}">time</small>
-					<p class="list-group-item-text" th:text="*{content}">content</p>
+					<h5 th:text="*{user.username}" style="display: inline">username</h5>
+					<small><i th:text="*{postTime}">time</i></small>
+					<p th:text="*{content}">content</p>
 				</div>
 			</div>
 		</div>
