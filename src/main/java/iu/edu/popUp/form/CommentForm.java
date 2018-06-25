@@ -11,6 +11,8 @@ import iu.edu.popUp.model.User;
 public class CommentForm {
 	private String content;
 	private Date postTime;
+	private User user;
+	private Post post;
 
 	public CommentForm() {
 		Date currentTime = new Date();
@@ -39,10 +41,24 @@ public class CommentForm {
 		this.postTime = postTime;
 	}
 
-	public Comment convertToComment(User user, Post post) {
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
+	public Comment convertToComment() {
 		Comment comment = new CommentFormConvert().convert(this);
-		comment.setPost(post);
-		comment.setUser(user);
 
 		return comment;
 	}
@@ -57,5 +73,4 @@ public class CommentForm {
 			return comment;
 		}
 	}
-
 }

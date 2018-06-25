@@ -11,6 +11,7 @@ public class PostForm {
 	private String content;
 	private Date createTime;
 	private Date updateTime;
+	private User user;
 
 	public PostForm() {
 		Date currentTime = new Date();
@@ -49,9 +50,16 @@ public class PostForm {
 		this.updateTime = updateTime;
 	}
 
-	public Post convertToPost(User user) {
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Post convertToPost() {
 		Post post = new PostFormConvert().convert(this);
-		post.setUser(user);
 
 		return post;
 	}

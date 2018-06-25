@@ -6,6 +6,10 @@ logging:
     iu.edu.popUp: debug
   file: logs/app.log
 spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
   mvc:
     static-path-pattern: /**
   thymeleaf:
@@ -19,3 +23,5 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+img:
+  location: F:/blog/file

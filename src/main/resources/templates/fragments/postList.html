@@ -12,15 +12,15 @@
 	</a>
 	<div class="media-body">
 		<p th:text="${iterStat.count}" hidden>count</p>
-		<h5 th:text="*{user.username}" style="display: inline">username</h5>
+		<h6 th:text="*{user.username}" style="display: inline">username</h6>
 		<small><i th:text="*{createTime}">time</i></small>
 		<p th:text="*{content}">content</p>
 
 		<div>
 			<form th:action="@{/posts/liked/input}" method="post"
 				style="display: inline">
-				<input type="hidden" name="postId" id="postIdId"
-					class="form-control" th:value="*{id}">
+				<input type="hidden" name="userId" th:value="${user.id}"> <input
+					type="hidden" name="postId" th:value="*{id}">
 				<button type="submit" class="btn btn-primary">like</button>
 			</form>
 			<button class="btn btn-primary" style="display: inline"
@@ -31,10 +31,10 @@
 		<div class="collapse" th:id="commentArea+${iterStat.count}">
 			<form class="form-inline" th:action="@{/posts/comment/input}"
 				method="post">
+				<input type="hidden" name="user.id" th:value="${user.id}"> <input
+					type="hidden" name="post.id" th:value="*{id}">
 				<textarea class="form-control my-2 mr-2" name="content"
 					id="contentId" rows="1" style="min-width: 80%"></textarea>
-				<input type="hidden" name="postId" id="postIdId"
-					class="form-control" th:value="*{id}">
 				<button type="submit" class="btn btn-primary">Reply</button>
 			</form>
 
@@ -42,11 +42,11 @@
 				th:each="comment,iterStat:*{comments}" th:object="${comment}">
 				<a class="pr-3" href="#"
 					th:href="@{'/users/'+*{user.id}+'/profile'}"> <img
-					class="rounded-circle" th:src="*{user.avatar}" style="width: 45px;">
+					class="rounded-circle" th:src="*{user.avatar}" style="width: 40px;">
 				</a>
 				<div class="media-body">
 					<p th:text="${iterStat.count}" hidden>count</p>
-					<h5 th:text="*{user.username}" style="display: inline">username</h5>
+					<h6 th:text="*{user.username}" style="display: inline">username</h6>
 					<small><i th:text="*{postTime}">time</i></small>
 					<p th:text="*{content}">content</p>
 				</div>

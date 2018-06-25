@@ -1,11 +1,13 @@
 <div th:fragment="postInput" class="shadow mb-4 card">
 	<div class="card-body">
 		<form id="postForm" th:action="@{/posts/input}" method="post">
+			<input type="hidden" name="user.id" th:value="${user.id}">
 			<div class="form-group">
 				<label for="contentId">Share your moment here</label>
 				<textarea class="form-control" name="content" id="contentId"
 					rows="3"></textarea>
 			</div>
+			<input type="file" name="file" />
 			<p class="text-right">
 				<button type="submit" class="btn btn-primary">Send</button>
 			</p>

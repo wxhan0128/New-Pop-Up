@@ -10,9 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import iu.edu.popUp.form.CommentForm;
+import iu.edu.popUp.form.LikedForm;
 import iu.edu.popUp.form.PostForm;
 import iu.edu.popUp.model.Comment;
 import iu.edu.popUp.model.Liked;
@@ -44,38 +44,30 @@ public class PostController {
 	}
 
 	@PostMapping("/posts/input")
-	public String postInput(HttpSession session, PostForm postForm) {
-		user = (User) session.getAttribute("user");
-		Post post = postForm.convertToPost(user);
+	public String postInput(PostForm postForm) {
+		Post post = postForm.convertToPost();
 		postServiceImpl.save(post);
 
 		return "redirect:/index";
 	}
 
 	@PostMapping("/posts/liked/input")
-	public String likePost(HttpSession session, @RequestParam long postId) {
-		user = (User) session.getAttribute("user");
+	public String likePost(LikedForm likedForm) {
 		Liked liked = new Liked();
-		Optional<Liked> likedOprional = likedServiceImpl.findLiked(user.getId(), postId);
+		Optional<Liked> likedOprional = likedServiceImpl.findLiked(likedForm.getUserId(), likedForm.getPostId());
 		if (!likedOprional.isPresent()) {
-			liked.setUserId(user.getId());
-			liked.setPostId(postId);
+			liked = likedForm.convertToLiked();
 			likedServiceImpl.save(liked);
 		} else {
 			liked = likedOprional.get();
-
 		}
 
 		return "redirect:/index";
 	}
 
 	@PostMapping("/posts/comment/input")
-	public String commentPost(HttpSession session, @RequestParam long postId, CommentForm commentForm) {
-		user = (User) session.getAttribute("user");
-		Optional<Post> postOptional = this.postServiceImpl.findOnePost(postId);
-		Post post = postOptional.get();
-
-		Comment comment = commentForm.convertToComment(user, post);
+	public String commentPost(CommentForm commentForm) {
+		Comment comment = commentForm.convertToComment();
 		this.commentServiceImpl.save(comment);
 
 		return "redirect:/index";

@@ -53,7 +53,7 @@ public class App {
 		if (userOptional.isPresent()) {
 			user = userOptional.get();
 		}
-		Post post = postForm.convertToPost(user);
+		Post post = postForm.convertToPost();
 		postServiceImpl.save(post);
 
 		postList = user.getPosts();
